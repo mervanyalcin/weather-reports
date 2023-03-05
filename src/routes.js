@@ -1,6 +1,6 @@
 import Home from "./pages/Home";
 import MainLayout from "./pages/MainLayout";
-import CityDetail from "./pages/CityDetail"
+import React from "react";
 
 export const routes = [
   {
@@ -12,10 +12,6 @@ export const routes = [
         index: true,
         element: <Home />,
       },
-      {
-        path: "/:city",
-        element: <CityDetail />,
-      }
     ],
   },
 ];

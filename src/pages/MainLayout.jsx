@@ -1,15 +1,16 @@
-import { Container } from "@mui/system";
+import React from "react";
 import { Outlet } from "react-router-dom";
-import Header from "./components/Header";
+import Footer from "./Footer";
+import Header from "./Header";
 
 export default function MainLayout() {
   return (
     <>
-      <Header />
-
-      <Container maxWidth="lg">
+      <div className="mx-auto max-w-5xl mb-20 px-10 pt-4 pb-20">
+        <Header />
         <Outlet />
-      </Container>
+        <Footer />
+      </div>
     </>
   );
 }

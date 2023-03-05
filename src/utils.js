@@ -11,7 +11,7 @@ export const currentCityHandle = (data) => {
 };
 
 
-export  function weatherSituation(weatherSituation) {
+export function weatherSituation(weatherSituation) {
   switch (weatherSituation) {
     case "Az Bulutlu":
       return "parcali-bulutlu";

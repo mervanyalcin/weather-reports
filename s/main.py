@@ -7,95 +7,94 @@ import requests
 import time
 
 # Use a service account.
-cred = credentials.Certificate("s\weather-project.json")
+cred = credentials.Certificate("s/weather-project.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 cities = {
-       'Adana/LTAG': 'Turkiye-TR',
-       'Adiyaman/LTDY': 'Turkiye-TR',
-       'Afyon/LTAF': 'Turkiye-TR',
-       'Agri/LTCB': 'Turkiye-TR',
-       'Aksaray/LT01': 'Turkiye-TR',
-       'Amasya/LTT3': 'Turkiye-TR',
-       'Ankara/LTAD': 'Turkiye-TR',
-       'Antalya/TU0199': 'Turkiye-TR',
-       'Ardahan/LT02': 'Turkiye-TR',
-       'Artvin/LTAT': 'Turkiye-TR',
-       'Aydin/LT03': 'Turkiye-TR',
-       'Balikesir/LTBF': 'Turkiye-TR',
-       'Bartin/LT04': 'Turkiye-TR',
-       'Batman/LTCJ': 'Turkiye-TR',
-       'Bayburt/LT05': 'Turkiye-TR',
-       'Bilecik/LTKY': 'Turkiye-TR',
-       'Bingol/LTT5': 'Turkiye-TR',
-       'Bitlis/LT07': 'Turkiye-TR',
-       'Bolu/LTT1': 'Turkiye-TR',
-       'Burdur/LT08': 'Turkiye-TR',
-       'Bursa/LTBU': 'Turkiye-TR',
-       'Canakkale/LTBH': 'Turkiye-TR',
-       'Cankiri/LT09': 'Turkiye-TR',
-       'Corum/LTT2': 'Turkiye-TR',
-       'Denizli/LT10': 'Turkiye-TR',
-       'Diyarbakir/LTCC': 'Turkiye-TR',
-       'Duzce/TU0629': 'Turkiye-TR',
-       'Edirne/LTEI': 'Turkiye-TR',
-       'Elazig/LTCA': 'Turkiye-TR',
-       'Erzincan/LTCD': 'Turkiye-TR',
-       'Erzurum/LTCE': 'Turkiye-TR',
-       'Eskisehir/LTES': 'Turkiye-TR',
-       'Gaziantep/LTGA': 'Turkiye-TR',
-       'Giresun/LT11': 'Turkiye-TR',
-       'Gumushane/LT12': 'Turkiye-TR',
-       'Hakkari/LT13': 'Turkiye-TR',
-       'Hatay/LTDA': 'Turkiye-TR',
-       'Igdir/TU0486': 'Turkiye-TR',
-       'Isparta/LTBM': 'Turkiye-TR',
-       'Istanbul/LTSI': 'Turkiye-TR',
-       'Izmir/LTBL': 'Turkiye-TR',
-       'Kahramanmaras/LT17': 'Turkiye-TR',
-       'Karabuk/LT18': 'Turkiye-TR',
-       'Karaman/LT19': 'Turkiye-TR',
-       'Kars/LTCF': 'Turkiye-TR',
-       'Kastamonu/LT20': 'Turkiye-TR',
-       'Kayseri/LTAU': 'Turkiye-TR',
-       'Kilis/LT23': 'Turkiye-TR',
-       'Kirikkale/LT21': 'Turkiye-TR',
-       'Kirklareli/LTKK': 'Turkiye-TR',
-       'Kirsehir/LT22': 'Turkiye-TR',
-       'Kocaeli/LTKO': 'Turkiye-TR',
-       'Konya/LTAN': 'Turkiye-TR',
-       'Kutahya/LT24': 'Turkiye-TR',
-       'Malatya/LTMA': 'Turkiye-TR',
-       'Manisa/LT25': 'Turkiye-TR',
-       'Mardin/LTT6': 'Turkiye-TR',
-       'Mersin/LT16': 'Turkiye-TR',
-       'Mugla/LTT8': 'Turkiye-TR',
-       'Mus/LTCK': 'Turkiye-TR',
-       'Nevsehir/LTT0': 'Turkiye-TR',
-       'Nigde/LTNI': 'Turkiye-TR',
-       'Ordu/LT26': 'Turkiye-TR',
-       'Osmaniye/LT27': 'Turkiye-TR',
-       'Rize/LT28': 'Turkiye-TR',
-       'Sakarya/LTSK': 'Turkiye-TR',
-       'Samsun/LTSS': 'Turkiye-TR',
-       'Sanliurfa/LT30': 'Turkiye-TR',
-       'Siirt/LT29': 'Turkiye-TR',
-       'Sinop/LTSP': 'Turkiye-TR',
-       'Sirnak/TU0265': 'Turkiye-TR',
-       'Sivas/LTAR': 'Turkiye-TR',
-       'Tekirdag/LTTK': 'Turkiye-TR',
-       'Tokat/LTAW': 'Turkiye-TR',
-       'Trabzon/LTTR': 'Turkiye-TR',
-       'Tunceli/LT32': 'Turkiye-TR',
-       'Usak/LTBO': 'Turkiye-TR',
-       'Van/LTCI': 'Turkiye-TR',
-       'Yalova/TU0615': 'Turkiye-TR',
+    "Adana/LTAG": "Turkiye-TR",
+    "Adiyaman/LTDY": "Turkiye-TR",
+    "Afyon/LTAF": "Turkiye-TR",
+    "Agri/LTCB": "Turkiye-TR",
+    "Aksaray/LT01": "Turkiye-TR",
+    "Amasya/LTT3": "Turkiye-TR",
+    "Ankara/LTAD": "Turkiye-TR",
+    "Antalya/TU0199": "Turkiye-TR",
+    "Ardahan/LT02": "Turkiye-TR",
+    "Artvin/LTAT": "Turkiye-TR",
+    "Aydin/LT03": "Turkiye-TR",
+    "Balikesir/LTBF": "Turkiye-TR",
+    "Bartin/LT04": "Turkiye-TR",
+    "Batman/LTCJ": "Turkiye-TR",
+    "Bayburt/LT05": "Turkiye-TR",
+    "Bilecik/LTKY": "Turkiye-TR",
+    "Bingol/LTT5": "Turkiye-TR",
+    "Bitlis/LT07": "Turkiye-TR",
+    "Bolu/LTT1": "Turkiye-TR",
+    "Burdur/LT08": "Turkiye-TR",
+    "Bursa/LTBU": "Turkiye-TR",
+    "Canakkale/LTBH": "Turkiye-TR",
+    "Cankiri/LT09": "Turkiye-TR",
+    "Corum/LTT2": "Turkiye-TR",
+    "Denizli/LT10": "Turkiye-TR",
+    "Diyarbakir/LTCC": "Turkiye-TR",
+    "Duzce/TU0629": "Turkiye-TR",
+    "Edirne/LTEI": "Turkiye-TR",
+    "Elazig/LTCA": "Turkiye-TR",
+    "Erzincan/LTCD": "Turkiye-TR",
+    "Erzurum/LTCE": "Turkiye-TR",
+    "Eskisehir/LTES": "Turkiye-TR",
+    "Gaziantep/LTGA": "Turkiye-TR",
+    "Giresun/LT11": "Turkiye-TR",
+    "Gumushane/LT12": "Turkiye-TR",
+    "Hakkari/LT13": "Turkiye-TR",
+    "Hatay/LTDA": "Turkiye-TR",
+    "Igdir/TU0486": "Turkiye-TR",
+    "Isparta/LTBM": "Turkiye-TR",
+    "Istanbul/LTSI": "Turkiye-TR",
+    "Izmir/LTBL": "Turkiye-TR",
+    "Kahramanmaras/LT17": "Turkiye-TR",
+    "Karabuk/LT18": "Turkiye-TR",
+    "Karaman/LT19": "Turkiye-TR",
+    "Kars/LTCF": "Turkiye-TR",
+    "Kastamonu/LT20": "Turkiye-TR",
+    "Kayseri/LTAU": "Turkiye-TR",
+    "Kilis/LT23": "Turkiye-TR",
+    "Kirikkale/LT21": "Turkiye-TR",
+    "Kirklareli/LTKK": "Turkiye-TR",
+    "Kirsehir/LT22": "Turkiye-TR",
+    "Kocaeli/LTKO": "Turkiye-TR",
+    "Konya/LTAN": "Turkiye-TR",
+    "Kutahya/LT24": "Turkiye-TR",
+    "Malatya/LTMA": "Turkiye-TR",
+    "Manisa/LT25": "Turkiye-TR",
+    "Mardin/LTT6": "Turkiye-TR",
+    "Mersin/LT16": "Turkiye-TR",
+    "Mugla/LTT8": "Turkiye-TR",
+    "Mus/LTCK": "Turkiye-TR",
+    "Nevsehir/LTT0": "Turkiye-TR",
+    "Nigde/LTNI": "Turkiye-TR",
+    "Ordu/LT26": "Turkiye-TR",
+    "Osmaniye/LT27": "Turkiye-TR",
+    "Rize/LT28": "Turkiye-TR",
+    "Sakarya/LTSK": "Turkiye-TR",
+    "Samsun/LTSS": "Turkiye-TR",
+    "Sanliurfa/LT30": "Turkiye-TR",
+    "Siirt/LT29": "Turkiye-TR",
+    "Sinop/LTSP": "Turkiye-TR",
+    "Sirnak/TU0265": "Turkiye-TR",
+    "Sivas/LTAR": "Turkiye-TR",
+    "Tekirdag/LTTK": "Turkiye-TR",
+    "Tokat/LTAW": "Turkiye-TR",
+    "Trabzon/LTTR": "Turkiye-TR",
+    "Tunceli/LT32": "Turkiye-TR",
+    "Usak/LTBO": "Turkiye-TR",
+    "Van/LTCI": "Turkiye-TR",
+    "Yalova/TU0615": "Turkiye-TR",
     "Yozgat/LTYZ": "Turkiye-TR",
     "Zonguldak/LTZO": "Turkiye-TR",
     "New_York/NYC": "USA-US",
     "Barcelona/LEBL": "Spain-ES",
-    "Sidney/SIDX": "Australia-AU",
     "Paris/LFPO": "France-FR",
     "Roma/LIRF": "Italy-IT",
     "Moskova/UUEE": "Russia-RU",
@@ -123,19 +122,24 @@ headers = {
 }
 
 
-def parse_data(dom, selector, name, process):
-    unp_data = str(dom.xpath(selector)[0])
+def parse_data(dom_, selector, name_, process):
+    unp_data = (
+        str(dom_.xpath(selector)[0])
+        if name_ != "lengthOfDaily  :  "
+        else len(dom_.xpath(selector))
+    )
     parsed_data = process(unp_data)
-    print(name + parsed_data)
+    if type(parsed_data) == str:
+        print(name_ + parsed_data)
+
     return parsed_data
 
 
-def db_writer(country_dicts, date=today_str):
+def db_writer(country_dicts, date_=today_str):
     for country_dict in country_dicts:
-        doc_ref = db.collection(date).add(country_dict)
-
-        users_ref = db.collection(date)
-        docs = users_ref.stream()
+        db.collection(date_).add(country_dict)
+        users_ref = db.collection(date_)
+        users_ref.stream()
         parsed_raw_datas.append(country_dict)
 
 
@@ -157,216 +161,276 @@ for key, value in cities.items():
     dom = html.fromstring(response.content)
 
     name = parse_data(
-        dom=dom,
+        dom_=dom,
         selector="(//div[@class='info-content']/span/text())[2]",
-        name="City            :  ",
+        name_="City            :  ",
         process=lambda raw_data: raw_data.strip().split(" ")[0],
     )
 
     date = parse_data(
-        dom=dom,
+        dom_=dom,
         selector="//div[@class='info-content']/span/text()",
-        name="Date            :  ",
+        name_="Date            :  ",
         process=lambda raw_data: raw_data,
     )
 
     degree = parse_data(
-        dom=dom,
+        dom_=dom,
         selector="//div[@class='short']/span/text()",
-        name="Degree          :  ",
+        name_="Degree          :  ",
         process=lambda raw_data: raw_data,
     )
 
     weather = parse_data(
-        dom=dom,
+        dom_=dom,
         selector="//div[@class='info']/span[@class='description']/text()",
-        name="weather         :  ",
+        name_="weather         :  ",
         process=lambda raw_data: raw_data,
     )
 
     wind = parse_data(
-        dom=dom,
+        dom_=dom,
         selector="(//div[@class='detail']/span[@class='description']/text())[3]",
-        name="Wind Speed      :  ",
+        name_="Wind Speed      :  ",
         process=lambda raw_data: raw_data,
     )
 
     windway = parse_data(
-        dom=dom,
+        dom_=dom,
         selector="(//div[@class='detail']/span[@class='description']/text())[2]",
-        name="Wind Direction  : ",
+        name_="Wind Direction  : ",
         process=lambda raw_data: raw_data,
     )
 
     humidity = parse_data(
-        dom=dom,
+        dom_=dom,
         selector="(//div[@class='detail']/span[@class='description']/text())[4]",
-        name="Humidity        :  ",
+        name_="Humidity        :  ",
         process=lambda raw_data: raw_data,
     )
 
     pressure = parse_data(
-        dom=dom,
+        dom_=dom,
         selector="(//div[@class='detail']/span[@class='description']/text())[5]",
-        name="Pressure        :  ",
+        name_="Pressure        :  ",
         process=lambda raw_data: raw_data,
     )
 
     sight_distance = parse_data(
-        dom=dom,
+        dom_=dom,
         selector="(//div[@class='detail']/span[@class='description']/text())[6]",
-        name="sight_distance  :  ",
+        name_="sight_distance  :  ",
         process=lambda raw_data: raw_data,
     )
 
-    high_degree0 = dom.xpath(
-        "//div[@class='widget-weather-day-list type1']/ul/li/div/span/text()"
-    )[0]
-    low_degree0 = dom.xpath(
-        "//div[@class='widget-weather-day-list type1']/ul/li/div/span/text()"
-    )[1]
-    high_degree1 = dom.xpath(
-        "//div[@class='widget-weather-day-list type1']/ul/li/div/span/text()"
-    )[2]
-    low_degree1 = dom.xpath(
-        "//div[@class='widget-weather-day-list type1']/ul/li/div/span/text()"
-    )[3]
-    high_degree2 = dom.xpath(
-        "//div[@class='widget-weather-day-list type1']/ul/li/div/span/text()"
-    )[4]
-    low_degree2 = dom.xpath(
-        "//div[@class='widget-weather-day-list type1']/ul/li/div/span/text()"
-    )[5]
-    high_degree3 = dom.xpath(
-        "//div[@class='widget-weather-day-list type1']/ul/li/div/span/text()"
-    )[6]
-    low_degree3 = dom.xpath(
-        "//div[@class='widget-weather-day-list type1']/ul/li/div/span/text()"
-    )[7]
-    high_degree4 = dom.xpath(
-        "//div[@class='widget-weather-day-list type1']/ul/li/div/span/text()"
-    )[8]
-    low_degree4 = dom.xpath(
-        "//div[@class='widget-weather-day-list type1']/ul/li/div/span/text()"
-    )[9]
-    high_degree5 = dom.xpath(
-        "//div[@class='widget-weather-day-list type1']/ul/li/div/span/text()"
-    )[10]
-    low_degree5 = dom.xpath(
-        "//div[@class='widget-weather-day-list type1']/ul/li/div/span/text()"
-    )[11]
+    high_degree0 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/div/span/text())[1]",
+        name_="high_degree0  :  ",
+        process=lambda raw_data: raw_data,
+    )
 
-    lengthofDaily = dom.xpath("//div[@class='widget-weather-day-list type1']/ul/li")
-    if len(lengthofDaily) > 6:
-        high_degree6 = dom.xpath(
-            "//div[@class='widget-weather-day-list type1']/ul/li/div/span/text()"
-        )[12]
-        low_degree6 = dom.xpath(
-            "//div[@class='widget-weather-day-list type1']/ul/li/div/span/text()"
-        )[13]
-    else:
-        high_degree6 = "null"
-        low_degree6 = "null"
+    low_degree0 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/div/span/text())[2]",
+        name_="low_degree0  :  ",
+        process=lambda raw_data: raw_data,
+    )
 
-    day1 = dom.xpath("//div[@class='widget-weather-day-list type1']/ul/li/span/text()")[
-        0
-    ]
-    print(day1.strip().split(" ")[0])
+    day1 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/span/text())[1]",
+        name_="day1  :  ",
+        process=lambda raw_data: raw_data,
+    )
+
+    high_degree1 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/div/span/text())[3]",
+        name_="high_degree1  :  ",
+        process=lambda raw_data: raw_data,
+    )
+
+    low_degree1 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/div/span/text())[4]",
+        name_="low_degree1  :  ",
+        process=lambda raw_data: raw_data,
+    )
 
     day1WeatherIcon = parse_data(
-        dom=dom,
+        dom_=dom,
         selector="(//div[@class='widget-weather-day-list type1']/ul/li/span[@class='img']/img/@src)[1]",
-        name="     day1WeatherIcon  :  ",
+        name_="day1WeatherIcon  :  ",
         process=lambda raw_data: raw_data,
     )
 
-    day2 = dom.xpath("//div[@class='widget-weather-day-list type1']/ul/li/span/text()")[
-        3
-    ]
-    print(day2.strip().split(" ")[0])
-    print("     High Degree      : ", high_degree1)
-    print("     Low Degree       : ", low_degree1)
+    day2 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/span/text())[4]",
+        name_="day2  :  ",
+        process=lambda raw_data: raw_data,
+    )
+
+    high_degree2 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/div/span/text())[5]",
+        name_="high_degree2  :  ",
+        process=lambda raw_data: raw_data,
+    )
+
+    low_degree2 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/div/span/text())[6]",
+        name_="low_degree2  :  ",
+        process=lambda raw_data: raw_data,
+    )
 
     day2WeatherIcon = parse_data(
-        dom=dom,
+        dom_=dom,
         selector="(//div[@class='widget-weather-day-list type1']/ul/li/span[@class='img']/img/@src)[2]",
-        name="     day2WeatherIcon  :  ",
+        name_="day2WeatherIcon  :  ",
         process=lambda raw_data: raw_data,
     )
 
-    day3 = dom.xpath("//div[@class='widget-weather-day-list type1']/ul/li/span/text()")[
-        6
-    ]
-    print(day3.strip().split(" ")[0])
-    print("     High Degree      : ", high_degree2)
-    print("     Low Degree       : ", low_degree2)
+    day3 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/span/text())[7]",
+        name_="day3  :  ",
+        process=lambda raw_data: raw_data,
+    )
+
+    high_degree3 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/div/span/text())[7]",
+        name_="high_degree3  :  ",
+        process=lambda raw_data: raw_data,
+    )
+
+    low_degree3 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/div/span/text())[8]",
+        name_="low_degree3  :  ",
+        process=lambda raw_data: raw_data,
+    )
 
     day3WeatherIcon = parse_data(
-        dom=dom,
+        dom_=dom,
         selector="(//div[@class='widget-weather-day-list type1']/ul/li/span[@class='img']/img/@src)[3]",
-        name="     day3WeatherIcon  :  ",
+        name_="day3WeatherIcon  :  ",
         process=lambda raw_data: raw_data,
     )
 
-    day4 = dom.xpath("//div[@class='widget-weather-day-list type1']/ul/li/span/text()")[
-        9
-    ]
-    print(day4.strip().split(" ")[0])
-    print("     High Degree      : ", high_degree3)
-    print("     Low Degree       : ", low_degree3)
+    day4 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/span/text())[10]",
+        name_="day4  :  ",
+        process=lambda raw_data: raw_data,
+    )
 
+    low_degree4 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/div/span/text())[10]",
+        name_="low_degree4  :  ",
+        process=lambda raw_data: raw_data,
+    )
+
+    high_degree4 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/div/span/text())[9]",
+        name_="high_degree4  :  ",
+        process=lambda raw_data: raw_data,
+    )
     day4WeatherIcon = parse_data(
-        dom=dom,
+        dom_=dom,
         selector="(//div[@class='widget-weather-day-list type1']/ul/li/span[@class='img']/img/@src)[4]",
-        name="     day4WeatherIcon  :  ",
+        name_="day4WeatherIcon  :  ",
         process=lambda raw_data: raw_data,
     )
 
-    day5 = dom.xpath("//div[@class='widget-weather-day-list type1']/ul/li/span/text()")[
-        12
-    ]
-    print(day5.strip().split(" ")[0])
-    print("     High Degree      : ", high_degree4)
-    print("     Low Degree       : ", low_degree4)
+    day5 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/span/text())[13]",
+        name_="day5  :  ",
+        process=lambda raw_data: raw_data,
+    )
+
+    low_degree5 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/div/span/text())[12]",
+        name_="low_degree5  :  ",
+        process=lambda raw_data: raw_data,
+    )
+
+    high_degree5 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/div/span/text())[11]",
+        name_="high_degree5  :  ",
+        process=lambda raw_data: raw_data,
+    )
 
     day5WeatherIcon = parse_data(
-        dom=dom,
+        dom_=dom,
         selector="(//div[@class='widget-weather-day-list type1']/ul/li/span[@class='img']/img/@src)[5]",
-        name="     day5WeatherIcon  :  ",
+        name_="day5WeatherIcon  :  ",
         process=lambda raw_data: raw_data,
     )
 
-    day6 = dom.xpath("//div[@class='widget-weather-day-list type1']/ul/li/span/text()")[
-        15
-    ]
-    print(day6.strip().split(" ")[0])
-    print("     High Degree      : ", high_degree5)
-    print("     Low Degree       : ", low_degree5)
+    day6 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/span/text())[16]",
+        name_="day6  :  ",
+        process=lambda raw_data: raw_data,
+    )
+
+    high_degree6 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/div/span/text())[13]",
+        name_="high_degree6  :  ",
+        process=lambda raw_data: raw_data,
+    )
+
+    low_degree6 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/div/span/text())[14]",
+        name_="low_degree6  :  ",
+        process=lambda raw_data: raw_data,
+    )
 
     day6WeatherIcon = parse_data(
-        dom=dom,
+        dom_=dom,
         selector="(//div[@class='widget-weather-day-list type1']/ul/li/span[@class='img']/img/@src)[6]",
-        name="     day6WeatherIcon  :  ",
+        name_="day6WeatherIcon  :  ",
         process=lambda raw_data: raw_data,
     )
 
-    if len(lengthofDaily) > 6:
-        day7 = dom.xpath(
-            "//div[@class='widget-weather-day-list type1']/ul/li/span/text()"
-        )[18]
-        print(day7.strip().split(" ")[0])
-        print("     High Degree      : ", high_degree6)
-        print("     Low Degree       : ", low_degree6)
-    else:
-        day7 = "null"
+    day7 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/span/text())[19]",
+        name_="day7  :  ",
+        process=lambda raw_data: raw_data,
+    )
 
-    if len(lengthofDaily) > 6:
-        day7WeatherIcon = parse_data(
-            dom=dom,
-            selector="(//div[@class='widget-weather-day-list type1']/ul/li/span[@class='img']/img/@src)[7]",
-            name="     day7WeatherIcon  :  ",
-            process=lambda raw_data: raw_data,
-        )
+    high_degree7 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/div/span/text())[14]",
+        name_="high_degree7  :  ",
+        process=lambda raw_data: raw_data,
+    )
+
+    low_degree7 = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/div/span/text())[16]",
+        name_="low_degree7  :  ",
+        process=lambda raw_data: raw_data,
+    )
+
+    day7WeatherIcon = parse_data(
+        dom_=dom,
+        selector="(//div[@class='widget-weather-day-list type1']/ul/li/span[@class='img']/img/@src)[7]",
+        name_="day7WeatherIcon  :  ",
+        process=lambda raw_data: raw_data,
+    )
 
     time.sleep(0.5)
     print()
@@ -416,7 +480,7 @@ for key, value in cities.items():
     # doc_ref = db.collection(today_str).add(country_dict_data)
     # doc_ref.asd
 
-db_writer(country_dicts=country_list, date=today_str)
+db_writer(country_dicts=country_list, date_=today_str)
 
 # for doc in docs:
 #     print(f'{doc.id} => {doc.to_dict()}')
